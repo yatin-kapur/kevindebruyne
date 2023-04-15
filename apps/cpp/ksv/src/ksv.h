@@ -2,6 +2,7 @@
 
 #include "lib/logger/log.h"
 #include "lib/rapidcsv/rapidcsv.h"
+#include "lib/k/k.h"
 
 class KSV
 {
