@@ -17,12 +17,28 @@ void KSV::run()
 {
     log.info("called KSV::run()");
 
-    // parse config file and get kdb connections
-    const std::string& qhost = m_config.child("KDB").attribute("host").as_string();
-    const std::string& userpass = m_config.child("KDB").attribute("userpass").as_string();
-    const int qport = m_config.child("KDB").attribute("port").as_int();
+    auto cfg = m_config.child("KSV");
 
-    log.info("KDB service passed as: " + qhost + ":" + std::to_string(qport));
+    // parse config file and get kdb connections
+    const std::string& qhost = cfg.child("KDB").attribute("host").as_string();
+    const std::string& userpass = cfg.child("KDB").attribute("userpass").as_string();
+    const int qport = cfg.child("KDB").attribute("port").as_int();
+
+    log.info("KDB service defined: " + qhost + ":" + std::to_string(qport));
+
+    // get all file patterns
+    std::vector<std::string> patterns;
+    auto data = cfg.child("Data");
+    for (const auto &csv : data)
+    { 
+        const std::string& dir = csv.child("Directory").child_value();
+        const std::string& filepattern = csv.child("FilePattern").child_value();
+        patterns.push_back(dir + filepattern);
+    }
+    
+    // get all the files that match these patterns
+
+    // for all file patterns, create a table schema and push it to the kdb service
 
     // send test message to kdb service just for fun
     I handle;

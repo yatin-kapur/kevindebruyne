@@ -7,6 +7,7 @@ cc_binary(
         "//lib/logger:logger",
         "//lib/rapidcsv:rapidcsv",
         "//lib/xmlparse:xmlparse",
+        "//lib/boost:boost",
         "//lib/k:klib",
     ],
     defines = [
