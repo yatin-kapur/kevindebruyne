@@ -1,0 +1,13 @@
+<KDB host="localhost" port="1717">
+
+<Data>
+    <CSV>
+        <Directory>/Users/yatinkapur/Documents/projects/find-footy/ykfbref/</Directory>
+        <FilePattern>pl_2021_22/keeper_data</FilePattern>
+    </CSV>
+
+    <CSV>
+        <Directory>/Users/yatinkapur/Documents/projects/find-footy/ykfbref/</Directory>
+        <FilePattern>pl_2021_22/player_data</FilePattern>
+    </CSV>
+</Data>
