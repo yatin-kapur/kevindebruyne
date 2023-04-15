@@ -1,12 +1,21 @@
 #include <iostream>
+#include <string>
 #include <vector>
 
-#include "lib/xmlparse/pugixml.h"
-#include "ksv.h"
+#include "KSV.h"
 
-int main()
+int main(int argc, char **argv)
 {
-    KSV ksv("filepath");
+    if (argc < 3)
+    {
+        std::cout << "No valid configuration file sent" << std::endl;
+        exit(1);
+    }
+
+    const std::string &cfg(argv[2]);
+    KSV ksv(cfg);
+
+    ksv.run();
 
     return 0;
 }

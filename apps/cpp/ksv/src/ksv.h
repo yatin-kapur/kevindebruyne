@@ -1,18 +1,28 @@
+#pragma once
+
 #include <iostream>
+#include <string>
+#include <vector>
 
 #include "lib/logger/log.h"
-#include "lib/rapidcsv/rapidcsv.h"
-#include "lib/k/k.h"
+#include "lib/xmlparse/pugixml.h"
+#include "KSVWriter.h"
 
 class KSV
 {
 public:
-    KSV(std::string);
+    KSV(const std::string&);
+    ~KSV();
 
+    std::vector<std::string> getFilesFromPattern(std::string);
+    void registerWriter(std::string);
+    void run();
 private:
-    std::string m_csvFile;
-    std::string m_qhost;
-    std::string m_qport;
+    const std::string m_configFile;
+
+    pugi::xml_document m_config;
+
+    std::vector<std::shared_ptr<KSVWriter>> m_ksvWriters;
 
     Log log;
 };

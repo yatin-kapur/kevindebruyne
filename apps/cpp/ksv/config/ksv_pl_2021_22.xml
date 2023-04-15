@@ -1,4 +1,4 @@
-<KDB host="localhost" port="1717">
+<KDB host="localhost" port="1717" userpass="kdb:pass">
 
 <Data>
     <CSV>
