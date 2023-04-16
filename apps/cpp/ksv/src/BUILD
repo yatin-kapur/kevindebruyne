@@ -12,5 +12,8 @@ cc_binary(
     ],
     defines = [
         "KXVER=3"
+    ],
+    copts = [
+        "-std=c++20"
     ]
 )

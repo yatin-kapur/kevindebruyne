@@ -4,6 +4,7 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include <mutex>
 
 class Log {
 public:
@@ -18,6 +19,7 @@ public:
 private:
     std::string m_class;
     int m_log_level;
+    std::mutex m_logMutex;
 public:
     void set_level(int level)
     { 
@@ -38,20 +40,29 @@ public:
     void error(T const& message)
     {
         if (m_log_level >= log_level_error) 
-        std::cout << now() << " [ERROR] [" << m_class << "]: " << message << std::endl;
+        {
+            std::lock_guard<std::mutex> guard(m_logMutex);
+            std::cout << now() << " [ERROR] [" << m_class << "]: " << message << std::endl;
+        }
     }
 
     template <typename T>
     void warn(T const& message)
     {
-        if (m_log_level >= log_level_warning) 
-        std::cout << now() << " [WARNING] [" << m_class << "]: " << message << std::endl;
+        if (m_log_level >= log_level_warning)
+        {
+            std::lock_guard<std::mutex> guard(m_logMutex); 
+            std::cout << now() << " [WARNING] [" << m_class << "]: " << message << std::endl;
+        }
     }
 
     template <typename T>
     void info(T const& message)
     {
         if (m_log_level >= log_level_error) 
-        std::cout << now() << " [INFO] [" << m_class << "]: " << message << std::endl;
+        {
+            std::lock_guard<std::mutex> guard(m_logMutex);
+            std::cout << now() << " [INFO] [" << m_class << "]: " << message << std::endl;
+        }
     }
 };

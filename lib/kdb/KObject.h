@@ -40,4 +40,5 @@ private:
     Log log;
 
     kdb_types::type m_type;
+    K m_data; 
 };

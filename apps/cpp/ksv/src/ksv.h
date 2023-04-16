@@ -17,8 +17,8 @@ public:
     KSV(const std::string&);
     ~KSV();
 
-    void registerWriter(std::string);
-    void parseCsvFile();
+    void start_tables();
+    void callback(const std::string&, std::unique_ptr<KRow>);
     void run();
 private:
     Log log;
@@ -26,8 +26,7 @@ private:
     const std::string m_configFile;
     pugi::xml_document m_config;
 
-    
-    std::unordered_map<std::string, std::shared_ptr<KSVTable>> m_KSVTables;
+    std::unordered_map<std::string, std::unique_ptr<KSVTable>> m_KSVTables;
 
     I handle; 
 };

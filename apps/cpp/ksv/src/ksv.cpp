@@ -1,11 +1,13 @@
-#include "KSV.h"
 #include <filesystem>
+#include <thread>
+
+#include "KSV.h"
 
 KSV::KSV(const std::string& file)
     : log("KSV"),
     m_configFile(file)
 {
-    log.info("constructed KSV for config file at: " + m_configFile);
+    log.info("Constructed KSV for config file at: " + m_configFile);
     m_config.load_file(m_configFile.c_str());
 }
 
@@ -16,7 +18,7 @@ KSV::~KSV()
 
 void KSV::run()
 {
-    log.info("called KSV::run()");
+    log.info("Called KSV::run()");
 
     auto cfg = m_config.child("KSV");
 
@@ -40,12 +42,14 @@ void KSV::run()
             const std::string& table = fp.attribute("table").as_string();
 
             auto pattern = dir + filepattern;
-            log.info("table name: " + table + " for file pattern: " + pattern);
 
             // check if this table exists in the map
             if (m_KSVTables.find(table) == m_KSVTables.end())
             {
-                m_KSVTables[table] = std::make_shared<KSVTable>(table); 
+                m_KSVTables[table] = std::make_unique<KSVTable>(
+                        std::bind(&KSV::callback, this, std::placeholders::_1, std::placeholders::_2), 
+                        table
+                    );
             }
             m_KSVTables[table]->add_pattern(pattern);
         }
@@ -59,4 +63,25 @@ void KSV::run()
     r0(result);
     kclose(handle);
     // finish and close handle
+
+    start_tables();
+    
+    // TODO: graceful closing on sigterm
+    while (true) {}
+}
+
+void KSV::start_tables() 
+{
+    // each table to process all their files
+    for (const auto &tbl : m_KSVTables)
+    {
+        auto t = std::thread(std::bind(&KSVTable::process_files, tbl.second.get()));
+        t.detach();
+    }
+}
+
+void KSV::callback(const std::string& tbl, std::unique_ptr<KRow> row)
+{
+    // add row to buffer with table name
+    log.info("Got row for table: " + tbl);
 }

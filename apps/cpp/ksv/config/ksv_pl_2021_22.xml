@@ -5,8 +5,8 @@
         <CSV>
             <Directory>/Users/yatinkapur/Documents/projects/find-footy/ykfbref/pl_2021_22</Directory>
             <Subdirectories>
-                <FilePattern table="keepers">/keeper_data</FilePattern>
-                <FilePattern table="players">/player_data</FilePattern>
+                <FilePattern table="keepers">/keeper_data/*.csv</FilePattern>
+                <FilePattern table="players">/player_data/*.csv</FilePattern>
             </Subdirectories>
         </CSV>
     </Data>

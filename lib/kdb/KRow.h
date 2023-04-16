@@ -3,7 +3,8 @@
 #include <iostream>
 #include <vector>
 #include "lib/logger/log.h"
-#include "KObject.h"
+// #include "KObject.h"
+#include "lib/k/k.h"
 
 class KRow
 {
@@ -13,5 +14,5 @@ public:
 private:
     Log log;
 
-    std::vector<std::shared_ptr<KObject>> m_fields;
+    std::vector<std::shared_ptr<K>> m_fields;
 };
