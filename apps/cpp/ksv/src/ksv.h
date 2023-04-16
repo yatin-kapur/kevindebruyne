@@ -3,11 +3,13 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 #include "lib/logger/log.h"
 #include "lib/xmlparse/pugixml.h"
 #include "lib/boost/algorithm/string.hpp"
-#include "KSVWriter.h"
+
+#include "KSVTable.h"
 
 class KSV
 {
@@ -19,10 +21,13 @@ public:
     void parseCsvFile();
     void run();
 private:
+    Log log;
+
     const std::string m_configFile;
     pugi::xml_document m_config;
 
-    const std::vector<std::shared_ptr<KSVWriter>> m_ksvWriters;
+    
+    std::unordered_map<std::string, std::shared_ptr<KSVTable>> m_KSVTables;
 
-    Log log;
+    I handle; 
 };

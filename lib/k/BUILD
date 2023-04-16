@@ -1,7 +1,7 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
-    name = "klib",
+    name = "k",
     srcs = [
         "c.o",
         "k.h",
@@ -9,7 +9,6 @@ cc_library(
     linkopts = [
         "-lpthread"
     ],
-
     linkstatic=1,
     visibility = ["//visibility:public"]
 )

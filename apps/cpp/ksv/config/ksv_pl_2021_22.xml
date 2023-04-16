@@ -3,13 +3,11 @@
 
     <Data>
         <CSV>
-            <Directory>/Users/yatinkapur/Documents/projects/find-footy/ykfbref/</Directory>
-            <FilePattern>pl_2021_22/keeper_data</FilePattern>
-        </CSV>
-
-        <CSV>
-            <Directory>/Users/yatinkapur/Documents/projects/find-footy/ykfbref/</Directory>
-            <FilePattern>pl_2021_22/player_data</FilePattern>
+            <Directory>/Users/yatinkapur/Documents/projects/find-footy/ykfbref/pl_2021_22</Directory>
+            <Subdirectories>
+                <FilePattern table="keepers">/keeper_data</FilePattern>
+                <FilePattern table="players">/player_data</FilePattern>
+            </Subdirectories>
         </CSV>
     </Data>
 </KSV>

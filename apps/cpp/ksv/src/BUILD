@@ -8,7 +8,7 @@ cc_binary(
         "//lib/rapidcsv:rapidcsv",
         "//lib/xmlparse:xmlparse",
         "//lib/boost:boost",
-        "//lib/k:klib",
+        "//lib/kdb:klib",
     ],
     defines = [
         "KXVER=3"
