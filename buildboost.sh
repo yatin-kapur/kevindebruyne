@@ -24,5 +24,5 @@ cc_library(
     name = 'boost',
     hdrs = glob(['**']),
     visibility = ['//visibility:public'],
-    includes = ['*'],
+    includes = ['./'],
 )" > BUILD
