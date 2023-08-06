@@ -1,28 +1,33 @@
 #include "KObject.h"
 
-static std::unordered_map<char, kdb_types::type> kdb_type_map = {
-    {   'b',    kdb_types::type::kboolean },
-    {   'u',    kdb_types::type::kguid    },
-    {   'g',    kdb_types::type::kbyte    },
-    {   'h',    kdb_types::type::kshort   },
-    {   'i',    kdb_types::type::kint     },
-    {   'j',    kdb_types::type::klong    },
-    {   'e',    kdb_types::type::kreal    },
-    {   'f',    kdb_types::type::kfloat   },
-    {   'c',    kdb_types::type::kchar    },
-    {   's',    kdb_types::type::ksymbol  },
-    {   'p',    kdb_types::type::ktimestamp   },
-    {   'm',    kdb_types::type::kmonth   },
-    {   'd',    kdb_types::type::kdate    },
-    {   'n',    kdb_types::type::ktimespan    },
-    {   'u',    kdb_types::type::kminute  },
-    {   'v',    kdb_types::type::ksecond  },
-    {   't',    kdb_types::type::ktime    },
-    {   'z',    kdb_types::type::kdatetime    }
+static std::unordered_map<std::string, kdb_types::type> kdb_type_map = {
+    {   "boolean",    kdb_types::type::kboolean },
+    {   "int",    kdb_types::type::kint     },
+    {   "long",    kdb_types::type::klong    },
+    {   "float",    kdb_types::type::kfloat   },
+    {   "char",    kdb_types::type::kchar  },
+    {   "symbol",    kdb_types::type::ksymbol  },
+    {   "date",    kdb_types::type::kdate    }
 };
 
+kdb_types::type kdb_types::get_type(std::string t)
+{
+    return kdb_type_map.find(t)->second; 
+}
 
-KObject::KObject(char t)
+template <typename T>
+K build_kdb_type(kdb_types::type t, T data)
+{
+    switch (t)
+    {
+        case kdb_types::type::ksymbol: return ks((S)data);
+        default: return krr((S)"na");
+    }
+}
+
+
+// KObject ////////////
+KObject::KObject(const std::string& t)
     :log("KObject"),
     m_type(kdb_types::get_type(t))
 {
@@ -33,5 +38,3 @@ KObject::~KObject()
 {
 
 }
-
-kdb_types::type kdb_types::get_type(char t){ return kdb_type_map.find(t)->second; }

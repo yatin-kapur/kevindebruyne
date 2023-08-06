@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ctime>
 #include <iomanip>
+#include <chrono>
 #include <sstream>
 #include <mutex>
 
@@ -28,12 +29,25 @@ public:
 
     std::string now()
     {
-        std::time_t now = std::time(0);
-        std::tm* gmt = std::gmtime(&now);
+        using namespace std::chrono;
+        using clock = system_clock;
+        
+        const auto current_time_point {clock::now()};
+        const auto current_time {clock::to_time_t (current_time_point)};
+        const auto current_gmttime {*std::gmtime (&current_time)};
+        const auto current_time_since_epoch {current_time_point.time_since_epoch()};
+        const auto current_milliseconds {duration_cast<milliseconds> (current_time_since_epoch).count() % 1000};
+        
+        std::ostringstream stream;
+        stream << std::put_time(&current_gmttime, "%Y-%m-%d %T") << "." << std::setw (3) << std::setfill ('0') << current_milliseconds;
+        return stream.str();
+    }
 
-        std::stringstream timess;
-        timess << std::put_time(gmt, "%Y-%m-%d %H:%M:%S");
-        return timess.str();
+    template <typename T>
+    void printlog(const std::string& prefix, T const& message)
+    {
+        const std::string& lvl = now() + " [" + prefix + "] [" + m_class + "]: " + message + "\n";
+        std::cout << lvl;
     }
 
     template <typename T>
@@ -42,7 +56,7 @@ public:
         if (m_log_level >= log_level_error) 
         {
             std::lock_guard<std::mutex> guard(m_logMutex);
-            std::cout << now() << " [ERROR] [" << m_class << "]: " << message << std::endl;
+            printlog("ERROR", message);
         }
     }
 
@@ -52,7 +66,7 @@ public:
         if (m_log_level >= log_level_warning)
         {
             std::lock_guard<std::mutex> guard(m_logMutex); 
-            std::cout << now() << " [WARNING] [" << m_class << "]: " << message << std::endl;
+            printlog("WARNING", message);
         }
     }
 
@@ -62,7 +76,7 @@ public:
         if (m_log_level >= log_level_error) 
         {
             std::lock_guard<std::mutex> guard(m_logMutex);
-            std::cout << now() << " [INFO] [" << m_class << "]: " << message << std::endl;
+            printlog("INFO", message);
         }
     }
 };

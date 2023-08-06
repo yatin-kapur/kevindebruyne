@@ -1,12 +1,171 @@
 <KSV>
     <KDB host="localhost" port="1717" userpass="kdb:pass"></KDB>
 
+    <Tables>
+        <Table table="keepers">
+            <Column name="match_id" type="symbol"></Column>
+            <Column name="team" type="symbol"></Column>
+            <Column name="against" type="symbol"></Column>
+            <Column name="h_a" type="symbol"></Column>
+            <Column name="player" type="symbol"></Column>
+            <Column name="nationality" type="symbol"></Column>
+            <Column name="age" type="symbol"></Column>
+            <Column name="minutes" type="symbol"></Column>
+            <Column name="shots_on_target_against" type="symbol"></Column>
+            <Column name="goals_against_gk" type="symbol"></Column>
+            <Column name="saves" type="symbol"></Column>
+            <Column name="save_pct" type="symbol"></Column>
+            <Column name="psxg_gk" type="symbol"></Column>
+            <Column name="passes_completed_launched_gk" type="symbol"></Column>
+            <Column name="passes_launched_gk" type="symbol"></Column>
+            <Column name="passes_pct_launched_gk" type="symbol"></Column>
+            <Column name="passes_gk" type="symbol"></Column>
+            <Column name="passes_throws_gk" type="symbol"></Column>
+            <Column name="pct_passes_launched_gk" type="symbol"></Column>
+            <Column name="passes_length_avg_gk" type="symbol"></Column>
+            <Column name="goal_kicks" type="symbol"></Column>
+            <Column name="pct_goal_kicks_launched" type="symbol"></Column>
+            <Column name="goal_kick_length_avg" type="symbol"></Column>
+            <Column name="crosses_gk" type="symbol"></Column>
+            <Column name="crosses_stopped_gk" type="symbol"></Column>
+            <Column name="crosses_stopped_pct_gk" type="symbol"></Column>
+            <Column name="def_actions_outside_pen_area_gk" type="symbol"></Column>
+            <Column name="avg_distance_def_actions_gk" type="symbol"></Column>
+        </Table>
+
+        <Table table="players">
+            <Column name="match_id" type="symbol"></Column>
+            <Column name="team" type="symbol"></Column>
+            <Column name="against" type="symbol"></Column>
+            <Column name="h_a" type="symbol"></Column>
+            <Column name="player" type="symbol"></Column>
+            <Column name="shirtnumber" type="symbol"></Column>
+            <Column name="nationality" type="symbol"></Column>
+            <Column name="position" type="symbol"></Column>
+            <Column name="age" type="symbol"></Column>
+            <Column name="minutes" type="symbol"></Column>
+            <Column name="goals" type="symbol"></Column>
+            <Column name="assists" type="symbol"></Column>
+            <Column name="pens_made" type="symbol"></Column>
+            <Column name="pens_att" type="symbol"></Column>
+            <Column name="shots_total" type="symbol"></Column>
+            <Column name="shots_on_target" type="symbol"></Column>
+            <Column name="cards_yellow" type="symbol"></Column>
+            <Column name="cards_red" type="symbol"></Column>
+            <Column name="touches" type="symbol"></Column>
+            <Column name="pressures" type="symbol"></Column>
+            <Column name="tackles" type="symbol"></Column>
+            <Column name="interceptions" type="symbol"></Column>
+            <Column name="blocks" type="symbol"></Column>
+            <Column name="xg" type="symbol"></Column>
+            <Column name="npxg" type="symbol"></Column>
+            <Column name="xa" type="symbol"></Column>
+            <Column name="sca" type="symbol"></Column>
+            <Column name="gca" type="symbol"></Column>
+            <Column name="passes_completed" type="symbol"></Column>
+            <Column name="passes" type="symbol"></Column>
+            <Column name="passes_pct" type="symbol"></Column>
+            <Column name="progressive_passes" type="symbol"></Column>
+            <Column name="carries" type="symbol"></Column>
+            <Column name="progressive_carries" type="symbol"></Column>
+            <Column name="dribbles_completed" type="symbol"></Column>
+            <Column name="dribbles" type="symbol"></Column>
+            <Column name="assisted_shots" type="symbol"></Column>
+            <Column name="crosses_into_penalty_area" type="symbol"></Column>
+            <Column name="passes_completed_long" type="symbol"></Column>
+            <Column name="passes_completed_medium" type="symbol"></Column>
+            <Column name="passes_completed_short" type="symbol"></Column>
+            <Column name="passes_into_final_third" type="symbol"></Column>
+            <Column name="passes_into_penalty_area" type="symbol"></Column>
+            <Column name="passes_long" type="symbol"></Column>
+            <Column name="passes_medium" type="symbol"></Column>
+            <Column name="passes_pct_long" type="symbol"></Column>
+            <Column name="passes_pct_medium" type="symbol"></Column>
+            <Column name="passes_pct_short" type="symbol"></Column>
+            <Column name="passes_progressive_distance" type="symbol"></Column>
+            <Column name="passes_short" type="symbol"></Column>
+            <Column name="passes_total_distance" type="symbol"></Column>
+            <Column name="corner_kicks" type="symbol"></Column>
+            <Column name="corner_kicks_in" type="symbol"></Column>
+            <Column name="corner_kicks_out" type="symbol"></Column>
+            <Column name="corner_kicks_straight" type="symbol"></Column>
+            <Column name="crosses" type="symbol"></Column>
+            <Column name="passes_blocked" type="symbol"></Column>
+            <Column name="passes_dead" type="symbol"></Column>
+            <Column name="passes_free_kicks" type="symbol"></Column>
+            <Column name="passes_ground" type="symbol"></Column>
+            <Column name="passes_head" type="symbol"></Column>
+            <Column name="passes_high" type="symbol"></Column>
+            <Column name="passes_intercepted" type="symbol"></Column>
+            <Column name="passes_left_foot" type="symbol"></Column>
+            <Column name="passes_live" type="symbol"></Column>
+            <Column name="passes_low" type="symbol"></Column>
+            <Column name="passes_offsides" type="symbol"></Column>
+            <Column name="passes_oob" type="symbol"></Column>
+            <Column name="passes_other_body" type="symbol"></Column>
+            <Column name="passes_pressure" type="symbol"></Column>
+            <Column name="passes_right_foot" type="symbol"></Column>
+            <Column name="passes_switches" type="symbol"></Column>
+            <Column name="through_balls" type="symbol"></Column>
+            <Column name="throw_ins" type="symbol"></Column>
+            <Column name="blocked_passes" type="symbol"></Column>
+            <Column name="blocked_shots" type="symbol"></Column>
+            <Column name="blocked_shots_saves" type="symbol"></Column>
+            <Column name="clearances" type="symbol"></Column>
+            <Column name="dribble_past" type="symbol"></Column>
+            <Column name="dribble_tackles" type="symbol"></Column>
+            <Column name="dribble_tackles_pct" type="symbol"></Column>
+            <Column name="dribbles_vs" type="symbol"></Column>
+            <Column name="errors" type="symbol"></Column>
+            <Column name="pressure_regains" type="symbol"></Column>
+            <Column name="pressure_regains_pct" type="symbol"></Column>
+            <Column name="pressures_att_3rd" type="symbol"></Column>
+            <Column name="pressures_def_3rd" type="symbol"></Column>
+            <Column name="pressures_mid_3rd" type="symbol"></Column>
+            <Column name="tackles_att_3td" type="symbol"></Column>
+            <Column name="tackles_def_3rd" type="symbol"></Column>
+            <Column name="tackles_interceptions" type="symbol"></Column>
+            <Column name="tackles_mid_3rd" type="symbol"></Column>
+            <Column name="tackles_won" type="symbol"></Column>
+            <Column name="carries_into_final_third" type="symbol"></Column>
+            <Column name="carries_into_penalty_area" type="symbol"></Column>
+            <Column name="carry_distance" type="symbol"></Column>
+            <Column name="carry_progressive_distance" type="symbol"></Column>
+            <Column name="dispossesed" type="symbol"></Column>
+            <Column name="dribbles_completed_pct" type="symbol"></Column>
+            <Column name="miscontrols" type="symbol"></Column>
+            <Column name="nutmegs" type="symbol"></Column>
+            <Column name="pass_targets" type="symbol"></Column>
+            <Column name="passes_recieved" type="symbol"></Column>
+            <Column name="passes_recieved_pct" type="symbol"></Column>
+            <Column name="players_dribbled_past" type="symbol"></Column>
+            <Column name="progressive_passes_recieved" type="symbol"></Column>
+            <Column name="touches_att_3rd" type="symbol"></Column>
+            <Column name="touches_att_pen_area" type="symbol"></Column>
+            <Column name="touches_def_3rd" type="symbol"></Column>
+            <Column name="touches_def_pen_area" type="symbol"></Column>
+            <Column name="touches_live_ball" type="symbol"></Column>
+            <Column name="touches_mid_3d" type="symbol"></Column>
+            <Column name="aerials_lost" type="symbol"></Column>
+            <Column name="aerials_won" type="symbol"></Column>
+            <Column name="aerials_won_pct" type="symbol"></Column>
+            <Column name="ball_recoveries" type="symbol"></Column>
+            <Column name="cards_yellow_red" type="symbol"></Column>
+            <Column name="fouled" type="symbol"></Column>
+            <Column name="fouls" type="symbol"></Column>
+            <Column name="offsides" type="symbol"></Column>
+            <Column name="own_goals" type="symbol"></Column>
+            <Column name="pens_conceded" type="symbol"></Column>
+            <Column name="pens_won" type="symbol"></Column>
+        </Table>
+    </Tables>
+
     <Data>
         <CSV>
             <Directory>/Users/yatinkapur/Documents/projects/find-footy/ykfbref/pl_2021_22</Directory>
             <Subdirectories>
-                <FilePattern table="keepers">/keeper_data/*.csv</FilePattern>
-                <FilePattern table="players">/player_data/*.csv</FilePattern>
+                <FilePattern table="keepers">/keeper_data/090_ManchesterUtd_Liverpool_keepers.csv</FilePattern>
+                <FilePattern table="players">/player_data/001_Brentford_Arsenal_players.csv</FilePattern>
             </Subdirectories>
         </CSV>
     </Data>

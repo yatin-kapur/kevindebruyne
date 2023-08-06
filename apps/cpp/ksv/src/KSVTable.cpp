@@ -16,6 +16,13 @@ KSVTable::~KSVTable()
 
 }
 
+void KSVTable::add_column(const std::string& colname, const std::string& coltype)
+{
+    log.info("Adding column '" + colname + "' of type " + coltype);
+    m_columns[colname] = kdb_types::get_type(coltype);
+}
+
+
 void KSVTable::add_pattern(const std::string& p)
 {
     m_patterns.push_back(p);
@@ -34,6 +41,32 @@ void KSVTable::add_pattern(const std::string& p)
 void KSVTable::process_file(const std::string& file)
 {
     log.info("Processing file: " + file);
+
+    rapidcsv::Document doc(file);
+    for (const auto& col : m_columns)
+    {
+        log.info(col.first);
+        // switch (col.second)
+        // {
+        //     case kdb_types::type::ksymbol:
+        //     {
+        //         std::vector<std::string> column;
+        //         column = doc.GetColumn<std::string>(col.first);
+        //         break;
+        //     }
+        //     case kdb_types::type::kint:
+        //     {
+        //         std::vector<std::string> column;
+        //         column = doc.GetColumn<std::string>(col.first);
+        //         break;
+        //     }
+        //     default:
+        //     {
+        //         std::vector<std::string> column;
+        //         column = doc.GetColumn<std::string>(col.first);
+        //     }
+        // }
+    }
 }
 
 void KSVTable::process_files()

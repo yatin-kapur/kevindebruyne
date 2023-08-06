@@ -8,37 +8,32 @@
 struct kdb_types
 {
     enum type {
+        // these are all just integers that are placed wherever the "I" 
+        // variable is used
         kboolean = KB,
-        kguid = UU,
-        kbyte = KG,
-        kshort = KH,
         kint = KI,
         klong = KJ,
-        kreal = KE,
         kfloat = KF,
         kchar = KC,
         ksymbol = KS,
-        ktimestamp = KP,
-        kmonth = KM,
-        kdate = KD,
-        ktimespan = KN,
-        kminute = KU,
-        ksecond = KV,
-        ktime = KT,
-        kdatetime = KZ
+        kdate = KD
     };
-    
-    static type get_type(char t);
+
+    // methods
+    static type get_type(std::string);
+
+    template <typename T>
+    K build_kdb_type(kdb_types::type, T data);
 };
 
 class KObject
 {
 public:
-    KObject(char);
+    KObject(const std::string&);
     ~KObject();
 private:
     Log log;
 
     kdb_types::type m_type;
-    K m_data; 
+    K m_data;
 };

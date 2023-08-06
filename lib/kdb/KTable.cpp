@@ -4,7 +4,7 @@ KTable::KTable(const std::string& tableName):
     m_tableName(tableName),
     log("KTable")
 {
-    log.info("constructed KTable.");
+    log.info("Constructed KTable.");
 }
 
 KTable::~KTable() 

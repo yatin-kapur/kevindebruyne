@@ -29,6 +29,25 @@ void KSV::run()
 
     log.info("KDB service defined: " + qhost + ":" + std::to_string(qport));
 
+    // create tables from the provided schema
+    auto tbls = cfg.child("Tables");
+    for (const auto &tbl : tbls)
+    {
+        const std::string& tablename = tbl.attribute("table").as_string();
+        m_KSVTables[tablename] = std::make_unique<KSVTable>(
+                std::bind(&KSV::callback, this, std::placeholders::_1, std::placeholders::_2), 
+                tablename
+            );
+
+        for (const auto& col : tbl)
+        {
+            auto colname = col.attribute("name").as_string();
+            auto coltype = col.attribute("type").as_string();
+
+            m_KSVTables[tablename]->add_column(colname, coltype);
+        }
+    }
+
     // get all file patterns
     std::vector<std::string> patterns;
     auto data = cfg.child("Data");
@@ -39,19 +58,17 @@ void KSV::run()
         for (const auto &fp: subd) // find all subdirectory patterns
         {
             const std::string& filepattern = fp.child_value();
-            const std::string& table = fp.attribute("table").as_string();
+            const std::string& tablename = fp.attribute("table").as_string();
 
             auto pattern = dir + filepattern;
 
             // check if this table exists in the map
-            if (m_KSVTables.find(table) == m_KSVTables.end())
+            if (m_KSVTables.find(tablename) == m_KSVTables.end())
             {
-                m_KSVTables[table] = std::make_unique<KSVTable>(
-                        std::bind(&KSV::callback, this, std::placeholders::_1, std::placeholders::_2), 
-                        table
-                    );
+                log.error("Table and schema of table '" + tablename + "' not defined. Exiting.");
+                exit(1);
             }
-            m_KSVTables[table]->add_pattern(pattern);
+            m_KSVTables[tablename]->add_pattern(pattern);
         }
     }
 

@@ -17,11 +17,14 @@ public:
     void add_pattern(const std::string&);
     void process_file(const std::string&);
     void process_files();
+
+    void add_column(const std::string&, const std::string&);
 private:
     Log log;
 
     std::vector<std::string> m_patterns;
     std::vector<std::string> m_files;
 
+    std::unordered_map<std::string, kdb_types::type> m_columns;
     TableCallback datacallback;
 };
